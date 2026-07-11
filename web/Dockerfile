@@ -1,0 +1,1 @@
+FROM node:18-alpine\n\nWORKDIR /app\n\nRUN apk add --no-cache \\\n  python3 \\\n  make \\\n  g++ \\\n  git \\\n  curl \\\n  bash \\\n  openjdk-11 \\\n  gradle \\\n  build-base \\\n  linux-headers\n\nRUN curl -sSL https://ollama.ai/install.sh | sh || true\n\nCOPY package*.json ./\nRUN npm install\n\nCOPY . .\n\nEXPOSE 3000\n\nCMD [\"npm\", \"start\"]\n
